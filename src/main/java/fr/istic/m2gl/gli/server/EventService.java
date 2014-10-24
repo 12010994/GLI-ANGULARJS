@@ -16,22 +16,18 @@ import fr.istic.m2gl.gli.shared.Participant;
  * TAA - TP 1 - JPA test : Event and car pooling manager.
  * @author Victor PETIT - Amandine MANCEAU 
  */
-public class EventList {
+public class EventService {
 	
 	public EntityManager manager;
 	EntityTransaction tx;
 	
-	public EventList(EntityManager manager, EntityTransaction tx){
+	public EventService(EntityManager manager, EntityTransaction tx){
 		this.manager = manager;
 		this.tx = tx;
 	}
 	
-	public void addEvent(String date, String place){
-		EventItf event;
+	public void addEvent(Event event){
 		try {
-			event = new Event();
-			event.setDate(date);
-			event.setPlace(place);
 			tx.begin();
 			manager.persist(event);
 		} catch (NoResultException e) {

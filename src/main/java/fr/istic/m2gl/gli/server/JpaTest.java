@@ -6,6 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import fr.istic.m2gl.gli.shared.CarItf;
+import fr.istic.m2gl.gli.shared.Event;
 import fr.istic.m2gl.gli.shared.EventItf;
 import fr.istic.m2gl.gli.shared.Participant;
 import fr.istic.m2gl.gli.shared.ParticipantItf;
@@ -13,7 +14,7 @@ import fr.istic.m2gl.gli.shared.ParticipantItf;
 public class JpaTest {
 
 	public static EntityManager manager;
-	public static EventList eventList;
+	public static EventService eventService;
 	public static EntityTransaction tx;
 
 	static{
@@ -21,25 +22,31 @@ public class JpaTest {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
 		manager = factory.createEntityManager();
 		tx = manager.getTransaction(); 
-		eventList = new EventList(manager, tx);
+		eventService = new EventService(manager, tx);
 		run();
 	}
 	
 	public static void run() {
 		
-		eventList.addEvent("11-11-11", "Redon");
-		eventList.addEvent("12-12-12", "Rennes");
-		Participant coco = eventList.addParticipant(1, "Coco");
-		Participant bob = eventList.addParticipant(1, "Bob");
-		Participant tom = eventList.addParticipant(2, "Tom");
-		eventList.addCar(1, 4);
-		eventList.addToCar(1, coco);
-		eventList.addToCar(1, bob);
-		eventList.addCar(2, 4);
-		eventList.addToCar(2, tom);
-		eventList.addCar(2, 4);
+		Event event1 = new Event();
+		Event event2 = new Event();
+		event1.setDate("11-11-11");
+		event1.setPlace("Redon");
+		event2.setDate("12-12-12");
+		event2.setPlace("Rennes");
+		eventService.addEvent(event1);
+		eventService.addEvent(event2);
+		Participant coco = eventService.addParticipant(1, "Coco");
+		Participant bob = eventService.addParticipant(1, "Bob");
+		Participant tom = eventService.addParticipant(2, "Tom");
+		eventService.addCar(1, 4);
+		eventService.addToCar(1, coco);
+		eventService.addToCar(1, bob);
+		eventService.addCar(2, 4);
+		eventService.addToCar(2, tom);
+		eventService.addCar(2, 4);
 		System.out.println("--------------------------------------");
-		for(EventItf e : eventList.getEvents() ){
+		for(EventItf e : eventService.getEvents() ){
 			System.out.println(e.getDate()+" "+e.getPlace());
 			System.out.print("Participants: ");
 			for(ParticipantItf p : e.getParticipants() ){
