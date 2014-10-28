@@ -7,9 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 import fr.istic.m2gl.gli.shared.Car;
-import fr.istic.m2gl.gli.shared.CarItf;
 import fr.istic.m2gl.gli.shared.Event;
-import fr.istic.m2gl.gli.shared.EventItf;
 import fr.istic.m2gl.gli.shared.Participant;
 
 /**
@@ -42,12 +40,12 @@ public class EventService {
 	}
 	
 	public List<Event> getEvents(){
-		//return the list of all events
+		//returns the list of all events
 		return manager.createQuery("FROM Event").getResultList();
 	}
 	
 	public Event getEvent(int id){
-		//return the id selected event 
+		//returns the event selected by the id
 		Event event = (Event) manager.createQuery(
 				"FROM Event WHERE id="+id).getSingleResult();
 		return(event);
@@ -63,8 +61,6 @@ public class EventService {
 		tx.commit();
 		return participant;
 	}
-	
-
 	
 	public void addCar(int idEvent, int nbSeat){
 		tx.begin();

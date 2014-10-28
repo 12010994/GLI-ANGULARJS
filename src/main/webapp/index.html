@@ -2,38 +2,8 @@
 <html lang="en" ng-app id="ng-app">
 <head>
 <script src="bower_components/angular/angular.min.js"></script>
-<script>
-        function PostsCtrlAjax($scope, $http)
-        {
-        $http({method: 'GET', url: '/rest/events'}).success(function(data) {
-        $scope.posts = data;
-        });
-        }
-        
-        function Test2($scope,$log,$http)
-        {
-        
-        	$scope.foo = function foo(){
-        	$log.error("click");
-        	
-	        	foo = {
-		        	"id":3,
-		        	"date":"10-10-10",
-		        	"place":"Paris",
-		        	"participants":[{"id":4,"name":"Tomy"}],
-					"cars":[
-						{"id":3,"seat":3,"passengers":[{"id":4,"name":"Tomy"}]},
-						{"id":4,"seat":4,"passengers":[]}]
-	        		}
-	        	
-	        	$http({method: 'GET', url: '/rest/events', foo}).success(function(data) {
-	      			$scope.posts = data;
-	       		});
-	        	$scope.titi = "toto";
-	       		console.log("toto");
-       		}
-        }
-</script>
+<script src="script.js"></script>
+
 <style>
 body {
 	font-family: arial;
@@ -73,15 +43,23 @@ body {
 			<h2>
 				{{post.place}}
 			</h2>
+			<h4>Id: {{post.id}}</h4>
+			<h4>Nombre de voiture: {{post.nbCar}}</h4>
 			<div class='time'>{{post.date}}</div>
 			<img
-				src="http://www.covoiturage-libre.fr/images/Conducteur-homme.jpg" />
+				src="img/Conducteur-homme.jpg" />
 		</div>
-
 	</div>
-	<div id="ng-app1" ng-app ng-controller="Test2">
-		<button ng-click="foo()">Increment</button>
-		{{titi}}
+	
+	<div id="ng-app1" ng-app ng-controller="SendCtrlAjax">
+		<p>
+		<input type="text" ng-model="foo">
+		<button ng-click="addEvent()">Add event to Paris</button>
+		</p>
+		<p>
+		<input type="number" ng-model="bar">
+		<button ng-click="addCar()">Add car to event 3</button>
+		</p>
 	</div>
 </body>
 </html>
