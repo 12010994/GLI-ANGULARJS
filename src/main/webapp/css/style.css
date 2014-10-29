@@ -1,0 +1,29 @@
+body {
+	font-family: arial;
+	font-size: 12px;
+	padding: 10px;
+}
+
+.eventsBody {
+	width: 300px;
+	border-bottom: dashed 2px #dedede
+}
+
+.postBody a {
+	color: #333333;
+	text-decoration: none
+}
+
+.postBody a:hover {
+	color: #006699;
+	background-color: #dedede
+}
+
+.time {
+	margin: 10px 0px 10px 0px;
+	color: #006699;
+}
+
+.frame {
+	width: 200px;
+}

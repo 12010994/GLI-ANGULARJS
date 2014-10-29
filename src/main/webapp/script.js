@@ -1,8 +1,8 @@
 
-function PostsCtrlAjax($scope, $http)
+function GetEventsCtrlAjax($scope, $http)
 {
 	$http({method: 'GET', url: '/rest/events'}).success(function(data) {
-		$scope.posts = data;
+		$scope.events = data;
 	});
 }
 
